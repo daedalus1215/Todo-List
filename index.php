@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Todo List</title>
    <!-- Bootstrap files --> 
    <!-- Latest compiled and minified CSS -->
@@ -21,19 +22,19 @@
   
   <div id="container">
     <div class="row">
-    <div class="col-xs-12 col-centered">
-    <div class="wrapper">
+      <div class="col sm-"></div>
+      
       <h1>To-Do List <i id="btn-plus" class="fa fa-plus"></i></h1>
+      
       <input id="new-note" type="text" placeholder="Add New Todo">
       <ul id="list">
         <li><span class="btn-trash"><i class="fa fa-trash"></i></span> Go To Potions Class</li>
         <li><span class="btn-trash"><i class="fa fa-trash"></i></span> Buy New Robes</li>
         <li><span class="btn-trash"><i class="fa fa-trash"></i></span> Visit Hagrid</li>
       </ul>
+      
     </div>
-      </div>  
   </div>
-    </div>
   <!-- Our JS -->
   <script type="text/javascript" src="assets/js/todos.js"></script>
 </body>
