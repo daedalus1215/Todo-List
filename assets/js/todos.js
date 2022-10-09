@@ -18,11 +18,11 @@
   global.querySelectorAll("ul li span").forEach(deleteSpan => {
     deleteSpan.addEventListener('click', () => {
       console.log('deleteSpan', deleteSpan)
-      fadeOut(deleteSpan);
+      fadeOut(deleteSpan, "li");
     });
   });
 
-  function fadeOut(fadeTarget) {
+  function fadeOut(fadeTarget, item) {
     let fadeEffect = setInterval(() => {
       if(!fadeTarget.style.opacity) {
         fadeTarget.style.opacity = 1;
@@ -32,17 +32,24 @@
       } else {
         clearInterval(fadeEffect)
       }
-      fadeTarget.closest("li").remove();
+      if (item) { 
+        fadeTarget.closest(item).remove(); 
+      }
     }, 500);
   }
 
+  global.querySelector('h1').addEventListener('click', (item) =>{ 
+    const inputField = global.querySelector('input#new-note');
+    // fadeOut(inputField);
 
-  /* Toggle the new note input field. */
-  $('i#btn-plus').click(function(event) {
-    $('input#new-note').fadeToggle();
+  })
+
+  // /* Toggle the new note input field. */
+  // $('i#btn-plus').click(function(event) {
+  //   $('input#new-note').fadeToggle();
     
-    event.stopPropagation(); // Absorb the touch.
-  });
+  //   event.stopPropagation(); // Absorb the touch.
+  // });
   
   /* Add the new Note to the list. */
   $('input#new-note').keypress(function (event) {
@@ -51,7 +58,7 @@
       // grabbing new todo text from input
       var valueOfInput = $(this).val();
       // create a new li and add to ul.
-      $("ul#list").append('<li><span><i class="fa fa-trash"></i></span> ' + valueOfInput + '</li>');
+      $("ul#list").append(`<li class="item"><span class="btn-trash"><i class="fa fa-trash"></i></span>${valueOfInput}</li>`);
       $(this).val("");
     }
 
