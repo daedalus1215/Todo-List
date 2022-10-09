@@ -1,24 +1,42 @@
 (function (global, $) {
   "use strict";
   
-  // Check off specific Todos by Clicking
-  $("ul").on("click", "li", function (event) {
-    
-    $(this).toggleClass("completed"); // simply toggle the class, to indicate deletion.
-    event.stopPropagation();
-  });
-
-  // Click on X to delete Todo
-  $("ul").on("click", "span", function (event) {
-    // Stop propagating.  
-    $(this).parent().fadeOut(500, function () {
-      $(this).remove();
+  global.querySelectorAll(".item").forEach(item => {
+    item.addEventListener('click', () => {
+      toggle(item, 'completed')      
     });
-
-    event.stopPropagation(); // Make sure we absorb the touch.
   });
 
-  
+  function toggle(item, status) {
+    if (item.classList.contains(status)) {
+      item.classList.remove(status);
+    } else {
+      item.classList.add(status);
+    }
+  }
+
+  global.querySelectorAll("ul li span").forEach(deleteSpan => {
+    deleteSpan.addEventListener('click', () => {
+      console.log('deleteSpan', deleteSpan)
+      fadeOut(deleteSpan);
+    });
+  });
+
+  function fadeOut(fadeTarget) {
+    let fadeEffect = setInterval(() => {
+      if(!fadeTarget.style.opacity) {
+        fadeTarget.style.opacity = 1;
+      } 
+      if(fadeTarget.style.opacity > 0) {
+        fadeTarget.style.opacity -= 0.1;
+      } else {
+        clearInterval(fadeEffect)
+      }
+      fadeTarget.closest("li").remove();
+    }, 500);
+  }
+
+
   /* Toggle the new note input field. */
   $('i#btn-plus').click(function(event) {
     $('input#new-note').fadeToggle();
@@ -38,4 +56,4 @@
     }
 
   });
-}(window, jQuery));
+}(document, jQuery));
